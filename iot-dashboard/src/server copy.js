@@ -40,7 +40,6 @@ wss.on('connection', ws => {
   ws.on('message', async (message) => {
     try {
       const parsedMessage = JSON.parse(message);
-      ws.emit('message', parsedMessage);
       console.log('Received message from client:', parsedMessage);
       // Lähetä viesti Azure Event Hubiin / Send a message to Azure Event Hub
       const batch = await producerClient.createBatch();

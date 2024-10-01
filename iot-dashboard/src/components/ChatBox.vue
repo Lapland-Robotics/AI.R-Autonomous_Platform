@@ -6,7 +6,10 @@
     <div v-for="(message, index) in messages" :key="index" class="message">
       <p v-if="message.direction === 'Message Received'"><strong>Partition:</strong> {{ message.partitionId }}</p>
       <p v-if="message.direction === 'Message Received'"><strong>Group:</strong> {{ message.consumerGroup }}</p>
-      <p><strong>Message:</strong> {{ message.body }}</p>
+      <p v-if="message.body.image_data">
+        <img :src="'data:image/png;base64,' + message.body.image_data" alt="Image" width="480" /><img/>
+      </p>
+      <p v-else><strong>Message:</strong> {{ message.body }}</p>
       <p>
         <strong>Status: </strong>
         <span :class="message.direction === 'Message Sent' ? 'sent' : 'received'">{{ message.direction }}</span>
@@ -36,6 +39,7 @@ export default {
       socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
         console.log('Received message from Event Hub:', message);
+        console.log(String(message.body).valueOf());
         this.messages.push({ ...message, direction: 'Message Received' });
       };
       socket.onerror = (error) => {
@@ -57,12 +61,13 @@ export default {
 <style>
 .chatbox {
   border: 1px solid #ccc;
-  padding: 10px;
   height: 400px;
   width: 800px;
   overflow-y: scroll;
   background-color: #f9f9f9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .status {
   background-color: #e0e0e0;

@@ -55,6 +55,7 @@ export default {
   flex: 1; /* Tekstikenttä vie kaiken tilan nappiin verrattuna */
   padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 10px;
   }
 
   button {

@@ -4,11 +4,17 @@
     
     <div class="content">
       <p>Welcome to {{ robotName }} Robot Data Center! Here you can monitor {{ robotName }} robot's data in real time and give it commands.</p>
+      <p>Choose the datatype you want to monitor from the navigation bar below.</p>
+      <p>Active tab: {{ activeTab }}</p>
     </div>
     
+    
     <div id="chat-container">
-      <ChatBox ref="chatbox"></ChatBox>
-      <TextFieldButton @message-sent="handleMessageSent"></TextFieldButton>
+      <DatatypeNavBar ref="datatype" @active-tab-changed="checkActiveTab"></DatatypeNavBar>
+      <ChatBox v-if="activeTab === 'Messages'" ref="chatbox" ></ChatBox>
+      <TextFieldButton v-if="activeTab === 'Messages'" @message-sent="handleMessageSent"></TextFieldButton>
+      <GpsFeed v-if="activeTab === 'GPS'" @message-sent="handleMessageSent"></GpsFeed>
+      <CameraFeed v-if="activeTab === 'Camera feed'"></CameraFeed>
     </div>
   </div>
 </template>
@@ -16,27 +22,43 @@
 <script>
 import ChatBox from '@/components/ChatBox.vue';
 import TextFieldButton from '@/components/TextFieldButton.vue';
-
+import DatatypeNavBar from '@/components/DatatypeNavBar.vue';
+import GpsFeed from '@/components/GpsFeed.vue';
+import CameraFeed from '@/components/CameraFeed.vue';
 export default {
+  data() {
+    return {
+      activeTab: 'Messages'
+    };
+  },
   name: 'Yahboom-Rosmaster-X3',
   components: {
+    DatatypeNavBar,
     ChatBox,
-    TextFieldButton
+    TextFieldButton,
+    GpsFeed,
+    CameraFeed
   },
   props: {
     name: {
       type: String,
       required: true
-    }
+    },
   },
   computed: {
     robotName() {
       return this.name.replace('-', ' ');
-    }
+    },
+
   },
   methods: {
     handleMessageSent(message) {
       this.$refs.chatbox.sendMessageToChatbox(message);
+    },
+    checkActiveTab() {
+      console.log('Active tab:', this.$refs.datatype.activeItem);
+      this.activeTab = this.$refs.datatype.activeItem;
+      return this.$refs.datatype.activeItem;
     }
   }
 }
