@@ -50,8 +50,10 @@ export default {
   margin-left: 20px;
 }
 
-.navbar-item a {
-  color: #fff;
-  text-decoration: none;
+.navbar-item:hover {
+  text-decoration: underline;
 }
+
+
+
 </style>

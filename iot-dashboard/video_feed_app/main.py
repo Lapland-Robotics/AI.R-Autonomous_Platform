@@ -1,24 +1,15 @@
 from flask import Flask, render_template, Response, request, jsonify, redirect, url_for
-from aiortc import RTCPeerConnection, RTCSessionDescription
 import cv2
-import json
-import uuid
-import asyncio
-import logging
 import time
 import numpy as np
-import pyautogui
 
-def capture_screen():
-    screen = pyautogui.screenshot()
-    frame = np.array(screen)
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    #frame = cv2.resize(frame, (1280, 720))  # Resize to HD resolution
-    return frame
+
+
 start_time = time.time()
 camera = cv2.VideoCapture(0)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
 end_time = time.time()
 print("Camera loading time: ", end_time - start_time)
 

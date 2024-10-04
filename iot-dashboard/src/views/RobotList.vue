@@ -86,7 +86,6 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background-color: white;
             bottom: -5px;
             left: 0;
             opacity: 0;

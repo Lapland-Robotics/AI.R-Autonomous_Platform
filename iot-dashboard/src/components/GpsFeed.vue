@@ -1,5 +1,5 @@
 <template>
-    <div style="height:400px; width:800px">
+    <div class="map-container">
       <l-map ref="map" v-model:zoom="zoom" :center="[47.41322, -1.219482]">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -58,4 +58,14 @@ mounted() {
 </script>
 
 
-<style></style>
+<style>
+.map-container {
+  height: 400px;
+  width: 800px;
+  overflow: hidden;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+}
+</style>

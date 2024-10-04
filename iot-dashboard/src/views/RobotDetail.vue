@@ -5,11 +5,10 @@
     <div class="content">
       <p>Welcome to {{ robotName }} Robot Data Center! Here you can monitor {{ robotName }} robot's data in real time and give it commands.</p>
       <p>Choose the datatype you want to monitor from the navigation bar below.</p>
-      <p>Active tab: {{ activeTab }}</p>
     </div>
     
     
-    <div id="chat-container">
+    <div id="data-container" class="data-container">
       <DatatypeNavBar ref="datatype" @active-tab-changed="checkActiveTab"></DatatypeNavBar>
       <ChatBox v-if="activeTab === 'Messages'" ref="chatbox" ></ChatBox>
       <TextFieldButton v-if="activeTab === 'Messages'" @message-sent="handleMessageSent"></TextFieldButton>
@@ -72,7 +71,7 @@ export default {
   padding: 20px;
 }
 
-#chat-container {
+#data-container {
   display: flex;
   flex-direction: column;
   align-items: center;

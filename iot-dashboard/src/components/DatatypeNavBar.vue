@@ -51,7 +51,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px;
   background-color: #BD462A;
   color: #fff;
   width: 100%;
@@ -70,28 +69,30 @@ export default {
   padding: 0;
 }
 
-.navbar-item {
+
+.navbar-menu .navbar-item {
+  margin:0;
   padding: 20px;
-  border-width: 2px;
-  border-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
   border-color: transparent;  
 }
 
-.navbar-item:first-child {
-  margin-left: 0;
+.navbar-item {
+  transition: background-color 0.3s;
 }
 
 .navbar-item:hover {
   cursor: pointer;
-  border-color: #fff;
+  background-color: #df5b3e;
 }
 
 .navbar-item.active {
-  border-color: #fff;
-  background-color: #e9a62941;
+  border-color: #ffffffcb;
+  background-color: #df5b3e;
 }
 
-.navbar-item a {
+.navbar-item a:hover {
   color: #ffffff23;
   text-decoration: none;
 }
